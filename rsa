@@ -1,25 +1,31 @@
-"""This for Factorize numbers in a file of two prime numbers
-"""
 import sys
-import math
 
-def is_prime(n):
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
+def is_prime(kla_num):
+    if kla_num < 2:
+        return False
+    for i in range(2, int(kla_num**0.5) + 1):
+        if kla_num % i == 0:
             return False
     return True
 
-def factor_rsa(n):
-    for i in range(2, n):
-        if is_prime(i) and is_prime(n // i):
-            return i, n // i
+def factorize(kla_num):
+    for i in range(2, int(kla_num**0.5) + 1):
+        if kla_num % i == 0 and is_prime(i):
+            return i, kla_num // i
     return None
 
-def main():
-    with open(sys.argv[1]) as f:
-        n = int(f.readline().strip())
-        p, q = factor_rsa(n)
-        print(f"{n}={p}*{q}")
+def main(file_name):
+    with open(file_name, 'r') as file:
+        for line in file:
+            kla_num = int(line.strip())
+            factors = factorize(kla_num)
+            if factors:
+                p, q = factors
+                print(f"{kla_num}={p}*{q}")
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: rsa <file>")
+        sys.exit(1)
+    file_name = sys.argv[1]
+    main(file_name)
