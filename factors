@@ -10,10 +10,13 @@ def factorize(sea_num):
 
     if sea_num < 2:
         return
-    
+    print("")
+    print(sea_num, "sea_num")
     while sea_num % i:
         i += 1
     print("{:.0f}={:.0f}*{:.0f}".format(sea_num, sea_num / i, i))
+    print(sea_num, "<- sea_num -")
+    print()
 
 if len(argv) != 2:
     exit()
