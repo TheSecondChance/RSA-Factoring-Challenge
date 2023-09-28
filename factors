@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+"""This for factorize set of numbers in a file to product of two small number
+"""
+from sys import argv
+
+
+def factorize(sea_num):
+    """"This for find two small numbers that multiply to give number"""
+    i = 2
+
+    if sea_num < 2:
+        return
+    
+    while sea_num % i:
+        i += 1
+    print("{:.0f}={:.0f}*{:.0f}".format(sea_num, sea_num / i, i))
+
+if len(argv) != 2:
+    exit()
+
+try:
+    with open(argv[1]) as file:
+        line = file.readline()
+
+        while line != "":
+            sea_num = int(line.split('\n')[0])
+            factorize(sea_num)
+            line = file.readline()
+except:
+    pass
